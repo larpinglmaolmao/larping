@@ -1,5 +1,8 @@
 name: BBWP Screener
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '7 */4 * * *'
 jobs:
   screen:
     runs-on: ubuntu-latest
@@ -15,3 +18,10 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python bbwp_worker.py
+      - name: Save results
+        run: |
+          git config user.name "bbwp-bot"
+          git config user.email "bbwp-bot@users.noreply.github.com"
+          git add -A state.json data.json || true
+          git diff --staged --quiet || git commit -m "update snapshot"
+          git push || true
