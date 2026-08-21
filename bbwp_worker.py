@@ -27,7 +27,7 @@ from pathlib import Path
 
 BB_LEN = 13
 MULT = 2
-LOOKBACK = 252
+LOOKBACK = 252  # capped adaptively by available history
 MA_LEN = 8
 FREEZE = 15.0
 COIL = 30.0
@@ -60,40 +60,53 @@ def get_json(url, headers=None, retries=3, backoff=1.5):
     raise RuntimeError(f"GET failed after {retries}: {url} :: {last}")
 
 
-# ---------- data ----------
+# ---------- data (Coinbase Exchange: US-accessible from CI runners) ----------
+
+# Liquid USD spot pairs. Symbols that 404 are skipped automatically.
+WATCH = [
+    "ETH", "SOL", "XRP", "DOGE", "ADA", "AVAX", "LINK", "DOT", "LTC", "BCH",
+    "UNI", "AAVE", "ATOM", "XLM", "ETC", "FIL", "ARB", "OP", "INJ", "SUI",
+    "SEI", "TIA", "APT", "NEAR", "ALGO", "ICP", "HBAR", "VET", "GRT", "LDO",
+    "MKR", "CRV", "SNX", "COMP", "SHIB", "PEPE", "BONK", "JUP", "ENA", "ONDO",
+    "PYTH", "JTO", "STX", "IMX", "SAND", "MANA", "AXS", "CHZ", "ZEC", "DASH",
+    "XTZ", "QNT", "ENS", "BLUR", "STRK", "RENDER", "POL", "TAO", "FET", "AERO",
+]
+
+API = "https://api.exchange.coinbase.com"
+
 
 def universe(n):
-    j = get_json("https://api.bybit.com/v5/market/tickers?category=spot")
-    if j.get("retCode") != 0:
-        raise RuntimeError(f"bybit tickers: {j.get('retMsg')}")
-    rows = []
-    for t in j["result"]["list"]:
-        sym = t["symbol"]
-        if not sym.endswith("USDT"):
-            continue
-        base = sym[:-4]
-        if base in STABLE or base == "BTC":
-            continue
-        try:
-            to = float(t.get("turnover24h") or 0)
-        except ValueError:
-            continue
-        rows.append({"symbol": sym, "base": base, "turnover": to})
-    rows.sort(key=lambda r: r["turnover"], reverse=True)
-    return rows[:n]
+    """Return up to n tradable USD pairs from the watchlist."""
+    j = get_json(f"{API}/products")
+    live = {
+        p["id"]
+        for p in j
+        if p.get("quote_currency") == "USD"
+        and not p.get("trading_disabled")
+        and p.get("status") == "online"
+        and not p.get("auction_mode")
+    }
+    out = []
+    for base in WATCH:
+        pid = f"{base}-USD"
+        if pid in live:
+            out.append({"symbol": pid, "base": base, "turnover": 0.0})
+        if len(out) >= n:
+            break
+    if not out:
+        raise RuntimeError("no tradable pairs matched the watchlist")
+    return out
 
 
-def candles(symbol, limit=400):
-    url = (
-        "https://api.bybit.com/v5/market/kline"
-        f"?category=spot&symbol={symbol}&interval=D&limit={limit}"
-    )
-    j = get_json(url)
-    if j.get("retCode") != 0 or not j.get("result", {}).get("list"):
-        raise RuntimeError(f"no klines for {symbol}")
+def candles(symbol, limit=300):
+    """Daily candles, oldest first. Coinbase returns [t, low, high, open, close, vol]."""
+    j = get_json(f"{API}/products/{symbol}/candles?granularity=86400")
+    if not isinstance(j, list) or not j:
+        raise RuntimeError(f"no candles for {symbol}")
     rows = [
-        {"t": int(k[0]), "o": float(k[1]), "h": float(k[2]), "l": float(k[3]), "c": float(k[4])}
-        for k in j["result"]["list"]
+        {"t": int(k[0]) * 1000, "l": float(k[1]), "h": float(k[2]),
+         "o": float(k[3]), "c": float(k[4])}
+        for k in j
     ]
     rows.sort(key=lambda r: r["t"])
     return rows
@@ -186,7 +199,7 @@ def classify(bbwp):
 
 def analyze(base, rows, tf=3):
     agg = aggregate(rows, tf)
-    if len(agg) < 40:
+    if len(agg) < 35:
         return None
     closes = [c["c"] for c in agg]
     series = bbwp_series(closes)
@@ -349,7 +362,7 @@ def main():
                 results.append(r)
         except Exception as e:  # noqa: BLE001
             failures.append(f"{u['base']}: {e}")
-        time.sleep(0.12)  # stay well inside rate limits
+        time.sleep(0.2)  # stay well inside rate limits
 
     if not results:
         # Fail loudly. A screener that silently returns nothing looks exactly
