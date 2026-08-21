@@ -1,10 +1,9 @@
 name: BBWP Screener
 
-on:
+"on":
   schedule:
-    # every 4 hours, a few minutes after the hour so daily bars have settled
     - cron: "7 */4 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -52,4 +51,4 @@ jobs:
         run: |
           curl -s -X POST "https://api.telegram.org/bot${TOKEN}/sendMessage" \
             -d chat_id="${CHAT}" \
-            -d text="🔴 BBWP screener run FAILED. Check GitHub Actions logs." > /dev/null
+            -d text="BBWP screener run FAILED. Check GitHub Actions logs." > /dev/null
