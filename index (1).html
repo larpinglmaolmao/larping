@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BBWP Compression Screener</title>
+<style>
+  :root{
+    --bg:#07090B; --panel:#0E1215; --line:#1C2328; --text:#D8E0E4; --dim:#5D6B72;
+    --green:#3FD07A; --blue:#4E8CFF; --violet:#A97BFF; --amber:#E0A94C; --red:#FF5C5C;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font:13px/1.5 ui-monospace,'SF Mono',Menlo,Consolas,monospace;padding:18px 14px}
+  .wrap{max-width:1180px;margin:0 auto}
+  .kicker{font-size:10px;letter-spacing:.2em;color:var(--green);margin-bottom:10px}
+  h1{font-size:26px;margin:0 0 6px;letter-spacing:-.01em;font-weight:600}
+  .sub{font-size:11.5px;color:var(--dim);margin:0 0 16px;line-height:1.6;max-width:720px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+  .chip{background:var(--panel);border:1px solid var(--line);padding:10px 14px;flex:1 1 130px;min-width:118px}
+  .chip .l{font-size:9px;letter-spacing:.18em;color:var(--dim)}
+  .chip .n{font-size:26px;line-height:1.15}
+  .chip .s{font-size:9px;color:var(--dim)}
+  .bar{display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  button{font:inherit;font-size:10.5px;padding:5px 10px;border-radius:20px;cursor:pointer;
+    background:transparent;color:var(--dim);border:1px solid var(--line)}
+  button.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+  .tblwrap{background:var(--panel);border:1px solid var(--line);overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:880px}
+  th{font-size:9px;letter-spacing:.14em;color:var(--dim);font-weight:400;padding:8px;text-transform:uppercase;text-align:right}
+  th.l,td.l{text-align:left}
+  td{padding:10px 8px;white-space:nowrap;text-align:right;border-bottom:1px solid var(--line)}
+  .tag{font-size:9.5px;letter-spacing:.1em;padding:3px 8px;border:1px solid;border-radius:3px}
+  .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;background:#2A3439}
+  .meta{font-size:10px;color:var(--dim);margin-left:6px}
+  details{margin-top:18px;color:var(--dim);font-size:11.5px;line-height:1.75}
+  summary{cursor:pointer}
+  .err{background:var(--panel);border-left:3px solid var(--red);padding:12px;color:#FF9E9E;margin-bottom:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">⚡ BBWP COMPRESSION SCREENER</div>
+  <h1>Volatility Freeze</h1>
+  <p class="sub">Top 50 alts ranked by Bollinger Band Width Percentile. Flags names pinned in the freeze zone
+    while price ranges, and the bar the squeeze releases. <span id="cfg"></span></p>
+
+  <div id="err" class="err" style="display:none"></div>
+  <div class="chips" id="chips"></div>
+
+  <div class="bar">
+    <span class="meta">SORT</span>
+    <button data-s="default" class="on">Setup quality</button>
+    <button data-s="bbwp">BBWP (lowest)</button>
+    <button data-s="streak">Streak (longest)</button>
+    <button data-s="range">Range (tightest)</button>
+    <button data-s="w1">Weekly change</button>
+    <button data-s="m1">Monthly change</button>
+    <span class="meta" id="updated"></span>
+  </div>
+
+  <div class="tblwrap">
+    <table>
+      <thead><tr>
+        <th class="l">#</th><th class="l">Token</th><th class="l">Status</th><th class="l">1D·3D·1W</th>
+        <th>Price</th><th>BBWP</th><th>MA8</th><th>Streak</th><th>Range</th><th>1W</th><th>1M</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+
+  <details>
+    <summary>How to read this</summary>
+    <p><b>BBWP</b> is the percentile rank of current Bollinger Band width against recent history. It is a
+      volatility reading, not a direction.</p>
+    <p><b style="color:var(--blue)">COMPRESSED</b> — coiled, not moving. A watchlist state, not an entry.<br>
+       <b style="color:var(--violet)">COILING</b> — heading into the freeze.<br>
+       <b style="color:var(--green)">FIRING / WAKING</b> — the squeeze is releasing. <b style="color:var(--text)">Direction
+       is not implied</b>: expansion resolves down as often as up.<br>
+       <b style="color:var(--red)">HOT</b> — volatility already expanded. Late.</p>
+    <p><b>Dots</b> show 1D, 3D and 1W. All three blue is multi-timeframe compression, the highest-conviction version.
+       <b>Range</b> is high-to-low across the compression window and gives you a defined invalidation level.</p>
+    <p style="color:#8A9AA1">Setup quality is a heuristic ranking, not a backtested edge. Nothing here is investment advice.</p>
+  </details>
+</div>
+
+<script>
+const COLORS={WAKING:'#3FD07A',FIRING:'#3FD07A',COMPRESSED:'#4E8CFF',COILING:'#A97BFF',HOT:'#FF5C5C',NEUTRAL:'#5D6B72'};
+const CHIPS=[['FIRING','freeze exit'],['WAKING','frozen, now live'],['COMPRESSED','in the freeze'],
+             ['COILING','falling in'],['HOT','already expanded'],['NEUTRAL','everything else']];
+let DATA=null, sortKey='default';
+
+function bbwpColor(v){
+  if(v==null) return 'var(--dim)';
+  if(v<=15) return '#4E8CFF'; if(v<=30) return '#3FD07A';
+  if(v<=60) return '#8FD04A'; if(v<=85) return '#E0A94C'; return '#FF5C5C';
+}
+const pct=v=>v==null?'—':(v>=0?'+':'')+v.toFixed(1)+'%';
+const price=v=>v<0.01?v.toPrecision(4):v.toLocaleString(undefined,{maximumFractionDigits:4});
+
+function render(){
+  if(!DATA) return;
+  const c=DATA.config;
+  document.getElementById('cfg').textContent =
+    `BB(${c.bb_len},${c.mult}) · ${c.lookback}-bar percentile · MA${c.ma_len}.`;
+  document.getElementById('updated').textContent =
+    `updated ${new Date(DATA.generated).toLocaleString()} · ${DATA.rows.length} symbols`;
+
+  document.getElementById('chips').innerHTML = CHIPS.map(([k,s])=>
+    `<div class="chip"><div class="l">${k}</div>
+     <div class="n" style="color:${COLORS[k]}">${DATA.counts[k]||0}</div>
+     <div class="s">${s}</div></div>`).join('');
+
+  const rows=[...DATA.rows];
+  const cmp={ bbwp:(a,b)=>a.bbwp-b.bbwp, streak:(a,b)=>b.streak-a.streak,
+              range:(a,b)=>a.range-b.range,
+              w1:(a,b)=>(b.w1??-999)-(a.w1??-999), m1:(a,b)=>(b.m1??-999)-(a.m1??-999) };
+  if(cmp[sortKey]) rows.sort(cmp[sortKey]);
+
+  document.getElementById('rows').innerHTML = rows.map((r,i)=>`
+    <tr>
+      <td class="l" style="color:var(--dim)">${i+1}</td>
+      <td class="l"><b>$${r.base}</b></td>
+      <td class="l"><span class="tag" style="border-color:${COLORS[r.status]};color:${COLORS[r.status]};
+        opacity:${r.status==='NEUTRAL'?.5:1}">${r.status}</span></td>
+      <td class="l">${r.dots.map(d=>`<span class="dot" style="background:${d==null?'#2A3439':bbwpColor(d)}"></span>`).join('')}</td>
+      <td>${price(r.price)}</td>
+      <td style="color:${bbwpColor(r.bbwp)}">${r.bbwp.toFixed(1)}</td>
+      <td style="color:var(--dim)">${r.ma==null?'—':r.ma.toFixed(1)}</td>
+      <td>${r.streak>0?r.streak+' bars':'<span style="color:var(--dim)">—</span>'}</td>
+      <td>${r.range.toFixed(1)}%</td>
+      <td style="color:${(r.w1??0)>=0?'var(--green)':'var(--red)'}">${pct(r.w1)}</td>
+      <td style="color:${(r.m1??0)>=0?'var(--green)':'var(--red)'}">${pct(r.m1)}</td>
+    </tr>`).join('');
+}
+
+document.querySelectorAll('button[data-s]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('button[data-s]').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); sortKey=b.dataset.s; render();
+});
+
+fetch('./data.json?t='+Date.now())
+  .then(r=>{ if(!r.ok) throw new Error('data.json not found ('+r.status+')'); return r.json(); })
+  .then(d=>{ DATA=d; render(); })
+  .catch(e=>{
+    const el=document.getElementById('err');
+    el.style.display='block';
+    el.textContent = e.message + ' — the worker has not committed a snapshot yet. Run the workflow once from the Actions tab.';
+  });
+</script>
+</body>
+</html>
