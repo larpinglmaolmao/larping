@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-08-21T18:53:15.885510+00:00",
+  "last_run": "2026-08-21T20:56:35.551253+00:00",
   "symbols": {
     "AAVE": {
       "bar": 1787270400000,
@@ -47,11 +47,11 @@
     },
     "COMP": {
       "bar": 1787270400000,
-      "status": "COMPRESSED"
+      "status": "FIRING"
     },
     "CRV": {
       "bar": 1787270400000,
-      "status": "NEUTRAL"
+      "status": "HOT"
     },
     "DASH": {
       "bar": 1787270400000,
@@ -131,7 +131,7 @@
     },
     "OP": {
       "bar": 1787270400000,
-      "status": "COMPRESSED"
+      "status": "FIRING"
     },
     "PEPE": {
       "bar": 1787270400000,
@@ -139,7 +139,7 @@
     },
     "PYTH": {
       "bar": 1787270400000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "QNT": {
       "bar": 1787270400000,
