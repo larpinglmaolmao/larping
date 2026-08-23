@@ -1,9 +1,9 @@
 {
-  "last_run": "2026-08-23T09:03:51.237264+00:00",
+  "last_run": "2026-08-23T13:46:38.375949+00:00",
   "symbols": {
     "AAVE": {
       "bar": 1787443200000,
-      "status": "FIRING"
+      "status": "HOT"
     },
     "ADA": {
       "bar": 1787443200000,
@@ -91,15 +91,15 @@
     },
     "ICP": {
       "bar": 1787443200000,
-      "status": "COMPRESSED"
+      "status": "FIRING"
     },
     "IMX": {
       "bar": 1787443200000,
-      "status": "COMPRESSED"
+      "status": "COILING"
     },
     "INJ": {
       "bar": 1787443200000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "JTO": {
       "bar": 1787443200000,
@@ -119,11 +119,11 @@
     },
     "MANA": {
       "bar": 1787443200000,
-      "status": "COMPRESSED"
+      "status": "FIRING"
     },
     "NEAR": {
       "bar": 1787443200000,
-      "status": "COMPRESSED"
+      "status": "COILING"
     },
     "ONDO": {
       "bar": 1787443200000,
@@ -143,7 +143,7 @@
     },
     "QNT": {
       "bar": 1787443200000,
-      "status": "COMPRESSED"
+      "status": "COILING"
     },
     "SAND": {
       "bar": 1787443200000,
