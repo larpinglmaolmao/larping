@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-08-23T13:46:38.375949+00:00",
+  "last_run": "2026-08-23T16:57:53.180384+00:00",
   "symbols": {
     "AAVE": {
       "bar": 1787443200000,
@@ -91,11 +91,11 @@
     },
     "ICP": {
       "bar": 1787443200000,
-      "status": "FIRING"
+      "status": "COMPRESSED"
     },
     "IMX": {
       "bar": 1787443200000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "INJ": {
       "bar": 1787443200000,
@@ -151,7 +151,7 @@
     },
     "SEI": {
       "bar": 1787443200000,
-      "status": "COMPRESSED"
+      "status": "COILING"
     },
     "SHIB": {
       "bar": 1787443200000,
