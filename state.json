@@ -1,9 +1,9 @@
 {
-  "last_run": "2026-08-25T17:45:59.699972+00:00",
+  "last_run": "2026-08-25T21:01:50.428268+00:00",
   "symbols": {
     "AAVE": {
       "bar": 1787616000000,
-      "status": "HOT"
+      "status": "WAKING"
     },
     "ADA": {
       "bar": 1787616000000,
@@ -43,7 +43,7 @@
     },
     "CHZ": {
       "bar": 1787616000000,
-      "status": "COILING"
+      "status": "COMPRESSED"
     },
     "COMP": {
       "bar": 1787616000000,
@@ -95,7 +95,7 @@
     },
     "IMX": {
       "bar": 1787616000000,
-      "status": "NEUTRAL"
+      "status": "COILING"
     },
     "INJ": {
       "bar": 1787616000000,
@@ -127,7 +127,7 @@
     },
     "ONDO": {
       "bar": 1787616000000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "OP": {
       "bar": 1787616000000,
@@ -151,7 +151,7 @@
     },
     "SEI": {
       "bar": 1787616000000,
-      "status": "NEUTRAL"
+      "status": "COILING"
     },
     "SHIB": {
       "bar": 1787616000000,
