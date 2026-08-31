@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-08-31T00:11:47.296838+00:00",
+  "last_run": "2026-08-31T04:09:43.485397+00:00",
   "symbols": {
     "AAVE": {
       "bar": 1788134400000,
@@ -95,7 +95,7 @@
     },
     "IMX": {
       "bar": 1788134400000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "INJ": {
       "bar": 1788134400000,
@@ -103,7 +103,7 @@
     },
     "JTO": {
       "bar": 1788134400000,
-      "status": "COMPRESSED"
+      "status": "FIRING"
     },
     "LDO": {
       "bar": 1788134400000,
@@ -147,7 +147,7 @@
     },
     "SAND": {
       "bar": 1788134400000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "SEI": {
       "bar": 1788134400000,
