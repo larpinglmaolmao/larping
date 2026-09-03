@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-09-03T00:28:42.980994+00:00",
+  "last_run": "2026-09-03T05:35:02.256094+00:00",
   "symbols": {
     "AAVE": {
       "bar": 1788393600000,
@@ -19,7 +19,7 @@
     },
     "ARB": {
       "bar": 1788393600000,
-      "status": "NEUTRAL"
+      "status": "HOT"
     },
     "ATOM": {
       "bar": 1788393600000,
@@ -42,8 +42,8 @@
       "status": "NEUTRAL"
     },
     "CHZ": {
-      "bar": 1788307200000,
-      "status": "COILING"
+      "bar": 1788393600000,
+      "status": "COMPRESSED"
     },
     "COMP": {
       "bar": 1788393600000,
@@ -118,7 +118,7 @@
       "status": "NEUTRAL"
     },
     "MANA": {
-      "bar": 1788307200000,
+      "bar": 1788393600000,
       "status": "NEUTRAL"
     },
     "NEAR": {
@@ -155,7 +155,7 @@
     },
     "SHIB": {
       "bar": 1788393600000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "SNX": {
       "bar": 1788393600000,
@@ -179,7 +179,7 @@
     },
     "UNI": {
       "bar": 1788393600000,
-      "status": "HOT"
+      "status": "NEUTRAL"
     },
     "VET": {
       "bar": 1788393600000,
