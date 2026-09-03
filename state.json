@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-09-03T12:23:35.318816+00:00",
+  "last_run": "2026-09-03T16:18:18.435038+00:00",
   "symbols": {
     "AAVE": {
       "bar": 1788393600000,
@@ -31,7 +31,7 @@
     },
     "AXS": {
       "bar": 1788393600000,
-      "status": "COMPRESSED"
+      "status": "FIRING"
     },
     "BCH": {
       "bar": 1788393600000,
@@ -95,7 +95,7 @@
     },
     "IMX": {
       "bar": 1788393600000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "INJ": {
       "bar": 1788393600000,
@@ -199,7 +199,7 @@
     },
     "ZEC": {
       "bar": 1788393600000,
-      "status": "NEUTRAL"
+      "status": "HOT"
     }
   }
 }
