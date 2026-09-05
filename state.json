@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-09-05T04:16:35.376326+00:00",
+  "last_run": "2026-09-05T08:17:09.983242+00:00",
   "symbols": {
     "AAVE": {
       "bar": 1788566400000,
@@ -15,7 +15,7 @@
     },
     "APT": {
       "bar": 1788566400000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "ARB": {
       "bar": 1788566400000,
@@ -43,7 +43,7 @@
     },
     "CHZ": {
       "bar": 1788566400000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "COMP": {
       "bar": 1788566400000,
@@ -63,7 +63,7 @@
     },
     "DOT": {
       "bar": 1788566400000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "ENA": {
       "bar": 1788566400000,
