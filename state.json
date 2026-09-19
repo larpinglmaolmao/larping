@@ -1,108 +1,108 @@
 {
-  "last_run": "2026-09-18T20:17:09.983714+00:00",
+  "last_run": "2026-09-19T00:23:51.994251+00:00",
   "symbols": {
     "AAVE": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "ADA": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "ALGO": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "APT": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "ARB": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "HOT"
     },
     "ATOM": {
-      "bar": 1789689600000,
-      "status": "COILING"
+      "bar": 1789776000000,
+      "status": "NEUTRAL"
     },
     "AVAX": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "AXS": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "COMPRESSED"
     },
     "BCH": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "BONK": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "CHZ": {
-      "bar": 1789689600000,
-      "status": "COMPRESSED"
+      "bar": 1789776000000,
+      "status": "NEUTRAL"
     },
     "COMP": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "CRV": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "DASH": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "DOGE": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "DOT": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "ENA": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "ETC": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "ETH": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "FIL": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "GRT": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "HBAR": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "ICP": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "IMX": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "COILING"
     },
     "INJ": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "JTO": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "LDO": {
@@ -110,95 +110,95 @@
       "status": "NEUTRAL"
     },
     "LINK": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "LTC": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "MANA": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "NEAR": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "HOT"
     },
     "ONDO": {
-      "bar": 1789689600000,
-      "status": "FIRING"
+      "bar": 1789776000000,
+      "status": "NEUTRAL"
     },
     "OP": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "PEPE": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "PYTH": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "QNT": {
-      "bar": 1789689600000,
-      "status": "NEUTRAL"
+      "bar": 1789776000000,
+      "status": "COILING"
     },
     "SAND": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "SEI": {
-      "bar": 1789689600000,
-      "status": "NEUTRAL"
+      "bar": 1789776000000,
+      "status": "COILING"
     },
     "SHIB": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "SNX": {
-      "bar": 1789689600000,
-      "status": "WAKING"
+      "bar": 1789776000000,
+      "status": "COMPRESSED"
     },
     "SOL": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "STX": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "HOT"
     },
     "SUI": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "TIA": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "UNI": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "HOT"
     },
     "VET": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "HOT"
     },
     "XLM": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "XRP": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "XTZ": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "NEUTRAL"
     },
     "ZEC": {
-      "bar": 1789689600000,
+      "bar": 1789776000000,
       "status": "HOT"
     }
   }
