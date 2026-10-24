@@ -1,5 +1,5 @@
 {
-  "last_run": "2026-10-24T04:22:51.338525+00:00",
+  "last_run": "2026-10-24T12:36:29.218967+00:00",
   "symbols": {
     "AAVE": {
       "bar": 1792800000000,
@@ -23,7 +23,7 @@
     },
     "ATOM": {
       "bar": 1792800000000,
-      "status": "COMPRESSED"
+      "status": "COILING"
     },
     "AVAX": {
       "bar": 1792800000000,
@@ -91,7 +91,7 @@
     },
     "ICP": {
       "bar": 1792800000000,
-      "status": "COILING"
+      "status": "NEUTRAL"
     },
     "IMX": {
       "bar": 1792800000000,
@@ -195,7 +195,7 @@
     },
     "XTZ": {
       "bar": 1792800000000,
-      "status": "COMPRESSED"
+      "status": "COILING"
     },
     "ZEC": {
       "bar": 1792800000000,
